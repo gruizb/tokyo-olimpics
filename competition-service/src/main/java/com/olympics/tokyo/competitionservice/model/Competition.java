@@ -89,4 +89,9 @@ public class Competition {
 		this.phase = phase;
 	}
 
+	public void validateCompetition() throws Exception {
+		competitors.validateCompetitors(this.phase);
+		
+	}
+
 }
