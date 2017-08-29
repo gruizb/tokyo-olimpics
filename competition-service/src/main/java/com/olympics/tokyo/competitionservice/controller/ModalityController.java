@@ -1,4 +1,4 @@
-package com.olympics.tokyo.competitionservice.services;
+package com.olympics.tokyo.competitionservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +9,7 @@ import com.olympics.tokyo.competitionservice.model.Modality;
 import com.olympics.tokyo.competitionservice.repository.Modalities;
 
 @RestController
-public class ModalityService {
+public class ModalityController {
 
 	@Autowired
 	private Modalities modalities;

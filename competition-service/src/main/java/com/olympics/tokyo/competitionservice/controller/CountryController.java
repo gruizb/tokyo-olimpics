@@ -1,4 +1,4 @@
-package com.olympics.tokyo.competitionservice.services;
+package com.olympics.tokyo.competitionservice.controller;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.olympics.tokyo.competitionservice.model.Country;
 import com.olympics.tokyo.competitionservice.repository.Participants;
 
 @RestController
-public class CountryService {
+public class CountryController {
 
 	@Autowired
 	private Participants participants;

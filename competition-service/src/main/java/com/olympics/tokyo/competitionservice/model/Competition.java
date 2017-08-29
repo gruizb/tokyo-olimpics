@@ -10,8 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.olympics.tokyo.competitionservice.exception.IncompleteCompetitionException;
+import com.olympics.tokyo.competitionservice.exception.InvalidDatesException;
+import com.olympics.tokyo.competitionservice.exception.InvalidSameCountryPhaseException;
+
 @Entity
 public class Competition {
+
+	private static long TIME_LIMIT = 1800000;
 
 	@Id
 	@GeneratedValue
@@ -89,9 +95,69 @@ public class Competition {
 		this.phase = phase;
 	}
 
-	public void validateCompetition() throws Exception {
+	public void validateCompetition()
+			throws IncompleteCompetitionException, InvalidSameCountryPhaseException, InvalidDatesException {
+
+		String fields = fillIncompleteFields();
+
+		if (fields != null && !fields.isEmpty())
+			throw new IncompleteCompetitionException(fields);
+
+		validateDates();
+
 		competitors.validateCompetitors(this.phase);
-		
+
+	}
+
+	private void validateDates() throws InvalidDatesException {
+		if (initDate.after(endDate)) {
+			throw new InvalidDatesException(InvalidDatesException.Reason.END_LOWER_THAN_INIT);
+		}
+
+		long initTime = initDate.getTimeInMillis();
+		long endTime = endDate.getTimeInMillis();
+
+		if ((endTime - initTime) < TIME_LIMIT) {
+			throw new InvalidDatesException(InvalidDatesException.Reason.LESS_THAN_TIME_LIMIT);
+
+		}
+
+	}
+
+	private String fillIncompleteFields() {
+		StringBuilder errors = new StringBuilder();
+
+		if (this.initDate == null) {
+			addSeparator(errors);
+			errors.append("initDate");
+		}
+		if (this.endDate == null) {
+			addSeparator(errors);
+			errors.append("endDate");
+		}
+		if (this.local == null) {
+			addSeparator(errors);
+			errors.append("local");
+		}
+		if (this.modality == null) {
+			addSeparator(errors);
+			errors.append("modality");
+		}
+		if (this.phase == null) {
+			addSeparator(errors);
+			errors.append("phase");
+		}
+		if (this.competitors == null) {
+			addSeparator(errors);
+			errors.append("competitors");
+		}
+
+		return errors.toString();
+	}
+
+	private void addSeparator(StringBuilder errors) {
+		if (!errors.toString().isEmpty())
+			errors.append(",");
 	}
 
 }

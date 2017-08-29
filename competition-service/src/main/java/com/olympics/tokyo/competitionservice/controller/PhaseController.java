@@ -1,4 +1,4 @@
-package com.olympics.tokyo.competitionservice.services;
+package com.olympics.tokyo.competitionservice.controller;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.olympics.tokyo.competitionservice.model.Phase;
 import com.olympics.tokyo.competitionservice.repository.Phases;
 
 @RestController
-public class PhaseService {
+public class PhaseController {
 
 	@Autowired
 	private Phases phases;

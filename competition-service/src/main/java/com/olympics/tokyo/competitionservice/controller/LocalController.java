@@ -1,4 +1,4 @@
-package com.olympics.tokyo.competitionservice.services;
+package com.olympics.tokyo.competitionservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +9,7 @@ import com.olympics.tokyo.competitionservice.model.Local;
 import com.olympics.tokyo.competitionservice.repository.Locals;
 
 @RestController
-public class LocalService {
+public class LocalController {
 
 	@Autowired
 	private Locals locals;

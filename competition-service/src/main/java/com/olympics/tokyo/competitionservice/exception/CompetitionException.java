@@ -2,6 +2,12 @@ package com.olympics.tokyo.competitionservice.exception;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * POJO para encapsular as mensagens de erro finais ao usuário
+ * 
+ * @author gruizb
+ *
+ */
 public class CompetitionException {
 
 	private String message;
